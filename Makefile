@@ -28,7 +28,7 @@
 
 .DEFAULT_GOAL := all
 
-NAME	  = gen
+NAME	  = Sonic_ERaZor
 SUFFIX	  = 
 PKGCONFIG = pkg-config
 DEBUG	 ?= 0

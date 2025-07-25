@@ -141,7 +141,7 @@ void sram_write() {
 
   if (sram.on) {
     /* save SRAM */
-    fp = fopen(PATH_SRAM_ROOT "game.srm", "wb");
+    fp = fopen(PATH_SRAM_ROOT "savedata.srm", "wb");
     if (fp != NULL) {
       fwrite(sram.sram,0x10000,1, fp);
       fclose(fp);
@@ -233,6 +233,7 @@ char *get_valid_filepath_jsonarray(json_t *patharr) {
   return NULL;
 }
 
+/*
 char *get_rom_path() {
   // Ensure config.rom exists
   json_t *config_rom = json_object_get(config_json, "rom");
@@ -241,7 +242,9 @@ char *get_rom_path() {
   json_t *config_rompaths = json_object_get(config_rom, "paths");
   return get_valid_filepath_jsonarray(config_rompaths);
 }
+*/
 
+/*
 char *get_diff_path() {
   // Ensure config.rom exists
   json_t *config_rom = json_object_get(config_json, "rom");
@@ -251,21 +254,26 @@ char *get_diff_path() {
   json_t *config_patchpaths = json_object_get(config_rom, "paths_patch");
   return get_valid_filepath_jsonarray(config_patchpaths);
 }
+*/
 
 int main (int argc, char *argv[]) {
-  char *rom_path = NULL;
+  char *rom_path = "romdata.dat";
   char *diff_path = NULL;
-  char *config_path = "./config.json";
 
   #ifdef __EMSCRIPTEN__
     rom_path = "/home/web_user/rom.bin";
     diff_path = "/patch.ips";
-  #else
-    // This isn't just disabled cause emscripten doesnt take args (kinda)
-    // It's disabled because it causes a crash for some reason
+  #endif
+
+  char *config_path = "./controls.json";
+
+  // This isn't just disabled cause emscripten doesnt take args (kinda)
+  // It's disabled because it causes a crash for some reason
+  #ifndef __EMSCRIPTEN__
     struct argparse_option options[] = {
       OPT_HELP(),
-      OPT_STRING('p', "patch", &diff_path, "Path to IPS patch file"),
+      //OPT_STRING('r', "rom", &rom_path, "Path to ROM file"),
+      //OPT_STRING('p', "patch", &diff_path, "Path to IPS patch file"),
       OPT_STRING('c', "config", &config_path, "Path to config file"),
       OPT_END(),
     };
@@ -292,8 +300,8 @@ int main (int argc, char *argv[]) {
   error_init();
   config_load(config_path);
 
-  if (!rom_path) rom_path = get_rom_path();
-  if (!diff_path) diff_path = get_diff_path();
+  //if (!rom_path) rom_path = get_rom_path();
+  //if (!diff_path) diff_path = get_diff_path();
 
   /* Genesis BOOT ROM support (2KB max) */
   memset(boot_rom, 0xFF, 0x800);
@@ -316,10 +324,11 @@ int main (int argc, char *argv[]) {
   }
 
   // Ensure config.rom exists
-  json_t *config_rom = json_object_get(config_json, "rom");
-  if (config_rom == NULL) return 0;
+  //json_t *config_rom = json_object_get(config_json, "rom");
+  //if (config_rom == NULL) return 0;
 
   // Load rom and patch, show warning messages if any issues occur
+  /*
   #ifdef ENABLE_DIALOGS
     json_t *config_warn_patch_missing = json_object_get(config_rom, "warn_patch_missing");
     if (
@@ -335,6 +344,7 @@ int main (int argc, char *argv[]) {
       );
     }
   #endif
+  */
 
   if((rom_path == NULL) || !load_rom(rom_path, diff_path)) {
     char caption[256];
@@ -342,7 +352,7 @@ int main (int argc, char *argv[]) {
     #ifdef ENABLE_DIALOGS
       pfd::message(
         "ROM Missing",
-        "You're missing a ROM file. Check your config.json if you're looking for where the ROM should be placed.",
+        "'romdata.dat' couldn't be found!",
         pfd::choice::ok,
         pfd::icon::error
       );
@@ -451,7 +461,7 @@ int main (int argc, char *argv[]) {
   if (sram.on)
   {
     /* load SRAM */
-    fp = fopen(PATH_SRAM_ROOT "game.srm", "rb");
+    fp = fopen(PATH_SRAM_ROOT "savedata.srm", "rb");
     if (fp!=NULL)
     {
       fread(sram.sram,0x10000,1, fp);

@@ -70,7 +70,7 @@ void config_legacy_set_defaults(void)
 	config_legacy.vdp_mode       = 0; /* = AUTO (1 = NTSC, 2 = PAL) */
 	config_legacy.master_clock   = 0; /* = AUTO (1 = NTSC, 2 = PAL) */
 	config_legacy.force_dtack    = 0;
-	config_legacy.addr_error     = 1;
+	config_legacy.addr_error     = 0;
 	config_legacy.bios           = 0;
 	config_legacy.lock_on        = 0; /* = OFF (can be TYPE_SK, TYPE_GG & TYPE_AR) */
 	config_legacy.ntsc           = 0;
@@ -100,84 +100,22 @@ void config_legacy_set_defaults(void)
 
 const char *config_default = "{ \
     \"binds\": { \
-        \"controller\": { \
-            \"1\": { \
-                \"1\": [\"pad_1_a\"], \
-                \"2\": [\"pad_1_b\"], \
-                \"3\": [\"pad_1_c\"], \
-                \"4\": [\"pad_1_y\"], \
-                \"7\": [\"pad_1_start\"], \
-                \"12\": [\"pad_1_up\"], \
-                \"13\": [\"pad_1_down\"], \
-                \"14\": [\"pad_1_left\"], \
-                \"15\": [\"pad_1_right\"] \
-            }, \
-            \"2\": { \
-                \"1\": [\"pad_2_a\"], \
-                \"2\": [\"pad_2_b\"], \
-                \"3\": [\"pad_2_c\"], \
-                \"4\": [\"pad_2_y\"], \
-                \"7\": [\"pad_2_start\"], \
-                \"12\": [\"pad_2_up\"], \
-                \"13\": [\"pad_2_down\"], \
-                \"14\": [\"pad_2_left\"], \
-                \"15\": [\"pad_2_right\"] \
-            } \
-        }, \
         \"keyboard\": {  \
-            \"256\": [\"quit\"],  \
+            \"Escape\": [\"quit\"], \
             \"Tab\": [\"reset\"],  \
-            \"258\": [\"reset\"],  \
             \"F11\": [\"fullscreen\"],  \
-            \"300\": [\"fullscreen\"],  \
             \"a\": [\"pad_1_a\"],  \
             \"A\": [\"pad_1_a\"],  \
             \"s\": [\"pad_1_b\"],  \
             \"S\": [\"pad_1_b\"],  \
             \"d\": [\"pad_1_c\"],  \
             \"D\": [\"pad_1_c\"], \
-            \"w\": [\"pad_1_y\"],  \
-            \"W\": [\"pad_1_y\"],  \
-            \"257\": [\"pad_1_start\"],  \
             \"Return\": [\"pad_1_start\"],  \
-            \"265\": [\"pad_1_up\"],  \
             \"Up\": [\"pad_1_up\"],  \
-            \"264\": [\"pad_1_down\"],  \
             \"Down\": [\"pad_1_down\"],  \
-            \"263\": [\"pad_1_left\"],  \
             \"Left\": [\"pad_1_left\"],  \
-            \"262\": [\"pad_1_right\"],  \
             \"Right\": [\"pad_1_right\"]  \
         } \
-    }, \
-    \"rom\": { \
-        \"paths\": [ \
-            \"./rom.bin\" \
-        ], \
-        \"paths_patch\": [\"./patch.ips\"], \
-        \"warn_patch_missing\": false \
-    }, \
-    \"system\": { \
-        \"confirm_reset\": true, \
-        \"confirm_quit\": true, \
-        \"psg_preamp\": 150, \
-        \"fm_preamp\": 100, \
-        \"hq_fm\": true, \
-        \"hq_psg\": true, \
-        \"filter\": 0, \
-        \"low_freq\": 200, \
-        \"high_freq\": 8000, \
-        \"lg\": 100, \
-        \"mg\": 100, \
-        \"hg\": 100, \
-        \"lp_range\": 32767, \
-        \"mono\": false, \
-        \"region_detect\": false, \
-        \"vdp_mode\": 0, \
-        \"master_clock\": 0, \
-        \"force_dtack\": false, \
-        \"addr_error\": false, \
-        \"no_sprite_limit\": true \
     } \
 }";
 

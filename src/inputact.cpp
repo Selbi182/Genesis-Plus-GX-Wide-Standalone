@@ -56,20 +56,20 @@ void input_run_action(char *str, int press) {
     } else if (strcmp(str, "reset") == 0) {
         if (!press) return;
         #ifdef ENABLE_DIALOGS
-            json_t *config_system = json_object_get(config_json, "system");
-            json_t *config_confirm_reset = json_object_get(config_system, "confirm_reset");
-            if (
-                (config_confirm_reset != NULL) &&
-                json_boolean_value(config_confirm_reset)
-            ) {
+            //json_t *config_system = json_object_get(config_json, "system");
+            //json_t *config_confirm_reset = json_object_get(config_system, "confirm_reset");
+            //if (
+            //    (config_confirm_reset != NULL) &&
+            //    json_boolean_value(config_confirm_reset)
+            //) {
                 pfd::button quit_result = pfd::message(
-                    "Reset",
-                    "Are you sure you want to reset?",
+                    "Restart Game",
+                    "Are you sure you want to restart the game?",
                     pfd::choice::yes_no,
                     pfd::icon::warning
                 ).result();
                 if (quit_result != pfd::button::yes) return;
-            }
+            //}
         #endif
         system_reset();
     } else if (strcmp(str, "fullscreen") == 0) {
@@ -77,20 +77,20 @@ void input_run_action(char *str, int press) {
     } else if (strcmp(str, "quit") == 0) {
         if (!press) return;
         #ifdef ENABLE_DIALOGS
-            json_t *config_system = json_object_get(config_json, "system");
-            json_t *config_confirm_quit = json_object_get(config_system, "confirm_quit");
-            if (
-                (config_confirm_quit != NULL) &&
-                json_boolean_value(config_confirm_quit)
-            ) {
+            //json_t *config_system = json_object_get(config_json, "system");
+            //json_t *config_confirm_quit = json_object_get(config_system, "confirm_quit");
+            //if (
+            //    (config_confirm_quit != NULL) &&
+            //    json_boolean_value(config_confirm_quit)
+            //) {
                 pfd::button quit_result = pfd::message(
                     "Quit",
-                    "Are you sure you want to quit?",
+                    "Are you sure you want to quit the game?",
                     pfd::choice::yes_no,
                     pfd::icon::question
                 ).result();
                 if (quit_result != pfd::button::yes) return;
-            }
+            //}
         #endif
         running = 0;
     }

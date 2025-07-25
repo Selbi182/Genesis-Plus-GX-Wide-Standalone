@@ -1521,9 +1521,9 @@ void render_bg_m5(int line)
 
   /* Common data */
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5) {
+  //if (render_obj == render_obj_m5) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = *(uint32 *)&vsram[0];
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -1676,9 +1676,9 @@ void render_bg_m5_vs(int line)
 
   /* Common data */
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_ste) {
+  //if (render_obj == render_obj_m5_ste) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = 0;
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -1869,9 +1869,9 @@ void render_bg_m5_im2(int line)
   /* Common data */
   int odd = odd_frame;
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_im2) {
+  //if (render_obj == render_obj_m5_im2) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = *(uint32 *)&vsram[0];
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -2025,9 +2025,9 @@ void render_bg_m5_im2_vs(int line)
   /* Common data */
   int odd = odd_frame;
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_im2_ste) {
+  //if (render_obj == render_obj_m5_im2_ste) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = 0;
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -2222,9 +2222,9 @@ void render_bg_m5(int line)
   /* Scroll Planes common data */
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
 
-  if (render_obj == render_obj_m5) {
+  //if (render_obj == render_obj_m5) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
 
   uint32 yscroll      = *(uint32 *)&vsram[0];
   uint32 pf_col_mask  = playfield_col_mask;
@@ -2383,9 +2383,9 @@ void render_bg_m5_vs(int line)
 
   /* Scroll Planes common data */
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_ste) {
+  //if (render_obj == render_obj_m5_ste) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = 0;
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -2581,9 +2581,9 @@ void render_bg_m5_im2(int line)
   /* Scroll Planes common data */
   int odd = odd_frame;
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_im2) {
+  //if (render_obj == render_obj_m5_im2) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = *(uint32 *)&vsram[0];
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -2742,9 +2742,9 @@ void render_bg_m5_im2_vs(int line)
   /* common data */
   int odd = odd_frame;
   uint32 xscroll      = *(uint32 *)&vram[hscb + ((line & hscroll_mask) << 2)];
-  if (render_obj == render_obj_m5_im2_ste) {
+  //if (render_obj == render_obj_m5_im2_ste) {
     xscroll += 40 + (40 << 16);
-  }
+  //}
   uint32 yscroll      = 0;
   uint32 pf_col_mask  = playfield_col_mask;
   uint32 pf_row_mask  = playfield_row_mask;
@@ -3335,7 +3335,7 @@ void render_obj_m5_ste(int line)
     }
 
     /* Display area offset */
-    xpos = xpos - 0x80;
+    xpos = xpos - 0x80 + 40;
 
     /* Sprite size */
     temp = object_info->size;
@@ -4194,9 +4194,9 @@ void render_line(int line)
       status |= spr_ovr;
       spr_ovr = 0;
 
+    }
       /* Sprites are still parsed when display is disabled */
       parse_satb(line);
-    }
 
     /* Blanked line */
     memset(&linebuf[0][0x20 - bitmap.viewport.x], 0x40, bitmap.viewport.w + 2*bitmap.viewport.x);
