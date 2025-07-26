@@ -40,13 +40,23 @@
  *
  ****************************************************************************************/
 
+#include "romdata.h"
 #include "shared.h"
 #include <zlib.h>
 
 static int check_zip(char *filename);
 
+int load_rom_static(unsigned char *buffer) {
+    memcpy(buffer, romdata, romdata_len);
+    return romdata_len;
+}
+
 int load_archive(char *filename, unsigned char *buffer, int maxsize, char *extension)
 {
+  if (strcmp(filename, "romdata.dat") == 0) {
+    return load_rom_static(buffer);
+  }
+
   int size = 0;
   
   if(check_zip(filename))

@@ -389,6 +389,7 @@ int main (int argc, char *argv[]) {
   char caption[100];
   sprintf(caption,"%s", rominfo.international);
   Backend_Video_SetWindowTitle(caption);
+  //Backend_Video_SetWindowTitle("SONIC ERAZOR - Epic Radical Zenith");
 
 #ifdef HAVE_OVERCLOCK
     overclock_delay = OVERCLOCK_FRAME_DELAY;

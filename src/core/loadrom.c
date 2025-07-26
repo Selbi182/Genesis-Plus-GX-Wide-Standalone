@@ -563,48 +563,11 @@ int load_rom(char *filename, char *diffname)
   ggenie_shutdown();
   areplay_shutdown();
 
-  /* check previous loaded ROM size */
-  if (cart.romsize > 0x800000)
-  {
-    /* assume no CD is currently loaded */
-    cdd.loaded = 0;
-  }
-
-  /* auto-detect CD image file */
-  size = cdd_load(filename, (char *)(cart.rom));
-  if (size < 0)
-  {
-    /* error opening file */
-    return (0);
-  }
-
-  /* CD image file ? */
-  if (size)
-  {
-    /* enable CD hardware */
-    system_hw = SYSTEM_MCD;
-
-    /* boot from CD hardware */
-    scd.cartridge.boot = 0x00;
-  }
-  else
+  if (true)
   {
     /* load file into ROM buffer */
     char extension[4];
     size = load_archive(filename, cart.rom, cdd.loaded ? 0x800000 : MAXROMSIZE, extension);
-
-    if (diffname != NULL) {
-        char patch_extension[4];
-        char *patch_buffer = (char *)malloc(MAXROMSIZE);
-        int size_patch = load_archive(diffname, (uint8 *)patch_buffer, MAXROMSIZE, patch_extension);
-        if (size_patch) {
-          size = ips_patch(
-            (char *)cart.rom, MAXROMSIZE,
-            patch_buffer, size_patch
-          );
-        }
-        free(patch_buffer);
-    }
 
     /* mark BOOTROM as unloaded if they have been overwritten by cartridge ROM */
     if (size > 0x800000)

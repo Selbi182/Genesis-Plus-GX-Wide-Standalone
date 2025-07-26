@@ -220,7 +220,8 @@ SOURCES	+=	src/main \
 			src/unzip \
 			src/fileio \
 			src/ips \
-			src/inputact
+			src/inputact \
+			src/romdata
 
 # Main Sources
 SOURCES	+=	lib/argparse/argparse
@@ -258,6 +259,8 @@ all: $(BINPATH)
 else
 all: $(PKGPATH)
 endif
+
+	mv $(BINPATH) "$(OUTDIR)/Sonic ERaZor - Zenith Edition$(SUFFIX)"
 
 clean:
 	rm -rf $(OBJDIR)
