@@ -45,12 +45,12 @@
 
 static int check_zip(char *filename);
 
-extern const unsigned char _binary_romdata_bin_start[];
-extern const unsigned char _binary_romdata_bin_end[];
+extern const unsigned char _binary_embed_s1erz_wide_bin_start[];
+extern const unsigned char _binary_embed_s1erz_wide_bin_end[];
 
 int load_rom_static(unsigned char *buffer) {
-    size_t len = _binary_romdata_bin_end - _binary_romdata_bin_start;
-    memcpy(buffer, _binary_romdata_bin_start, len);
+    size_t len = _binary_embed_s1erz_wide_bin_end - _binary_embed_s1erz_wide_bin_start;
+    memcpy(buffer, _binary_embed_s1erz_wide_bin_start, len);
     return len;
 }
 

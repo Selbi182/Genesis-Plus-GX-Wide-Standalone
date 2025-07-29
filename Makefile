@@ -224,7 +224,7 @@ SOURCES	+=	src/main \
 			src/inputact
 
 # Binary resources to embed
-BINARY_RESOURCES = romdata.bin
+BINARY_RESOURCES = s1erz_wide.bin
 
 # Main Sources
 SOURCES	+=	lib/argparse/argparse
@@ -236,7 +236,7 @@ PKGPATH = $(OUTDIR)/$(NAME)$(PKGSUFFIX)
 
 OBJECTS += $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SOURCES)))
 
-OBJECTS += $(addprefix $(OBJDIR)/, $(BINARY_RESOURCES:=.o))
+OBJECTS += $(addprefix $(OBJDIR)/, $(BINARY_RESOURCES).o)
 
 
 $(shell mkdir -p $(OUTDIR))
@@ -254,7 +254,7 @@ $(OBJDIR)/%.o: %.cpp
 	$(CXX) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 	@echo " Done!"
 
-$(OBJDIR)/romdata.bin.o: embed/s1erz_wide.bin
+$(OBJDIR)/s1erz_wide.bin.o: embed/s1erz_wide.bin
 	@mkdir -p $(@D)
 	@echo -n Embedding $<...
 	$(LD) -r -b binary $< -o $@
