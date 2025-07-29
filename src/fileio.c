@@ -40,15 +40,18 @@
  *
  ****************************************************************************************/
 
-#include "romdata.h"
 #include "shared.h"
 #include <zlib.h>
 
 static int check_zip(char *filename);
 
+extern const unsigned char _binary_romdata_bin_start[];
+extern const unsigned char _binary_romdata_bin_end[];
+
 int load_rom_static(unsigned char *buffer) {
-    memcpy(buffer, romdata, romdata_len);
-    return romdata_len;
+    size_t len = _binary_romdata_bin_end - _binary_romdata_bin_start;
+    memcpy(buffer, _binary_romdata_bin_start, len);
+    return len;
 }
 
 int load_archive(char *filename, unsigned char *buffer, int maxsize, char *extension)

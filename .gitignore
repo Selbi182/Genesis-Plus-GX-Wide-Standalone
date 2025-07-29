@@ -6,3 +6,4 @@ bin/
 *.srm
 .DS_Store
 lib_ext/
+/embed/s1erz_wide.bin

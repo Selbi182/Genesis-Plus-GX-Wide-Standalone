@@ -71,6 +71,7 @@ PLATFORM ?= Unknown
 
 OUTDIR = bin/$(PLATFORM)
 OBJDIR = objects/$(PLATFORM)
+EMBDIR = embed/$(PLATFORM)
 
 ifdef ARCH
 	OUTDIR := $(OUTDIR)/$(ARCH)
@@ -220,8 +221,10 @@ SOURCES	+=	src/main \
 			src/unzip \
 			src/fileio \
 			src/ips \
-			src/inputact \
-			src/romdata
+			src/inputact
+
+# Binary resources to embed
+BINARY_RESOURCES = romdata.bin
 
 # Main Sources
 SOURCES	+=	lib/argparse/argparse
@@ -232,6 +235,9 @@ BINPATH = $(OUTDIR)/$(NAME)$(SUFFIX)
 PKGPATH = $(OUTDIR)/$(NAME)$(PKGSUFFIX)
 
 OBJECTS += $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SOURCES)))
+
+OBJECTS += $(addprefix $(OBJDIR)/, $(BINARY_RESOURCES:=.o))
+
 
 $(shell mkdir -p $(OUTDIR))
 $(shell mkdir -p $(OBJDIR))
@@ -248,11 +254,21 @@ $(OBJDIR)/%.o: %.cpp
 	$(CXX) -c $(CFLAGS) $(INCLUDES) $(DEFINES) $< -o $@
 	@echo " Done!"
 
+$(OBJDIR)/romdata.bin.o: embed/s1erz_wide.bin
+	@mkdir -p $(@D)
+	@echo -n Embedding $<...
+	$(LD) -r -b binary $< -o $@
+	@echo " Done!"
+
+
+
 $(BINPATH): $(OBJDIR) $(OBJECTS)
 	@echo -n Linking...
 	$(CXX) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o $@ $(LIBS)
 	@echo " Done!"
 	$(STRIP) $@
+
+
 
 ifeq ($(BINPATH),$(PKGPATH))
 all: $(BINPATH)
@@ -261,6 +277,6 @@ all: $(PKGPATH)
 endif
 
 	mv $(BINPATH) "$(OUTDIR)/Sonic ERaZor - Zenith Edition$(SUFFIX)"
-
+	rm -f $(OUTDIR)/savedata.srm
 clean:
 	rm -rf $(OBJDIR)
