@@ -17,6 +17,9 @@
 
 SDL_GameController *controllers[MAX_DEVICES];
 
+extern const unsigned char _binary_embed_gamecontrollerdb_txt_start[];
+extern const unsigned char _binary_embed_gamecontrollerdb_txt_end[];
+
 void update_analog(int padnum) {
   int axis_lx = SDL_GameControllerGetAxis(controllers[padnum], SDL_CONTROLLER_AXIS_LEFTX);
   int axis_ly = SDL_GameControllerGetAxis(controllers[padnum], SDL_CONTROLLER_AXIS_LEFTY);
@@ -112,10 +115,18 @@ void update_controller_connections() {
 int Backend_Input_Init() {
   SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
   SDL_GameControllerEventState(SDL_ENABLE);
-  SDL_GameControllerAddMappingsFromFile("./gamecontrollerdb.txt");
+
+  //SDL_GameControllerAddMappingsFromFile("./gamecontrollerdb.txt");
+  // replaced the line above with embedded db
+  size_t len = _binary_embed_gamecontrollerdb_txt_end - _binary_embed_gamecontrollerdb_txt_start;
+  SDL_RWops* rw = SDL_RWFromConstMem(_binary_embed_gamecontrollerdb_txt_start, len);
+  if (rw) {
+      int count = SDL_GameControllerAddMappingsFromRW(rw, 1);
+      printf("%d controller configs loaded", count);
+  }
 
   for (int i=0;i < MAX_DEVICES;i++) controllers[i] = NULL;
-  update_controller_connections();
+    update_controller_connections();
 
   return 1;
 }

@@ -1,0 +1,32 @@
+{
+    "binds": {
+        "controller": {
+            "1": {
+                "1": ["pad_1_a"],
+                "2": ["pad_1_b"],
+                "3": ["pad_1_c"],
+                "7": ["pad_1_start"],
+                "12": ["pad_1_up"],
+                "13": ["pad_1_down"],
+                "14": ["pad_1_left"],
+                "15": ["pad_1_right"]
+            }
+        },
+        "keyboard": { 
+            "Escape": ["quit"], 
+            "Tab": ["reset"], 
+            "F11": ["fullscreen"], 
+            "a": ["pad_1_a"], 
+            "A": ["pad_1_a"], 
+            "s": ["pad_1_b"], 
+            "S": ["pad_1_b"], 
+            "d": ["pad_1_c"], 
+            "D": ["pad_1_c"],
+            "Return": ["pad_1_start"], 
+            "Up": ["pad_1_up"], 
+            "Down": ["pad_1_down"], 
+            "Left": ["pad_1_left"], 
+            "Right": ["pad_1_right"] 
+        }
+    }
+}

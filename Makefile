@@ -223,9 +223,6 @@ SOURCES	+=	src/main \
 			src/ips \
 			src/inputact
 
-# Binary resources to embed
-BINARY_RESOURCES = s1erz_wide.bin
-
 # Main Sources
 SOURCES	+=	lib/argparse/argparse
 
@@ -236,7 +233,8 @@ PKGPATH = $(OUTDIR)/$(NAME)$(PKGSUFFIX)
 
 OBJECTS += $(addprefix $(OBJDIR)/, $(addsuffix .o, $(SOURCES)))
 
-OBJECTS += $(addprefix $(OBJDIR)/, $(BINARY_RESOURCES).o)
+OBJECTS += $(addprefix $(OBJDIR)/, s1erz_wide.bin.o)
+OBJECTS += $(addprefix $(OBJDIR)/, gamecontrollerdb.txt.o)
 
 
 $(shell mkdir -p $(OUTDIR))
@@ -260,6 +258,11 @@ $(OBJDIR)/s1erz_wide.bin.o: embed/s1erz_wide.bin
 	$(LD) -r -b binary $< -o $@
 	@echo " Done!"
 
+$(OBJDIR)/gamecontrollerdb.txt.o: embed/gamecontrollerdb.txt
+	@mkdir -p $(@D)
+	@echo -n Embedding $<...
+	$(LD) -r -b binary $< -o $@
+	@echo " Done!"
 
 
 $(BINPATH): $(OBJDIR) $(OBJECTS)
@@ -276,7 +279,13 @@ else
 all: $(PKGPATH)
 endif
 
+# Finalization
 	mv $(BINPATH) "$(OUTDIR)/Sonic ERaZor - Zenith Edition$(SUFFIX)"
 	rm -f $(OUTDIR)/savedata.srm
+	cp -fu side_files/* $(OUTDIR)
+
+#####################
+
+# Delete all compiled objects when calling "make clean"
 clean:
 	rm -rf $(OBJDIR)
