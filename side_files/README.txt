@@ -42,10 +42,10 @@ passion, experimentation, and community feedback. Have fun!
 
 
 ================================
-What is the "DX" version?
+What is the "Zenith Edition"?
 ================================
 
-Sonic ERaZor DX is a port of the Sonic 1 ROM hack "Sonic ERaZor 8.1" as a standalone,
+Sonic ERaZor: Zenith Edition is a port of the Sonic 1 ROM hack "Sonic ERaZor 8.1" as a standalone,
 self-contained Microsoft Windows EXE file. It runs on a custom Sega Mega Drive emulator to play the
 game in glorious 16:9 widescreen with enhancements not available on the original hardware.
 
@@ -132,14 +132,13 @@ Further Links
 Sonic Retro wiki page - full info and development history:
 	https://info.sonicretro.org/Sonic_ERaZor
 
-SAGE page - official event listing:
-	https://sonicfangameshq.com/forums/showcase/sonic-erazor-8-2025.2385/
-
 Forum thread - announcements and community discussion:
 	https://forums.sonicretro.org/threads/sonic-erazor-8-2025-now-in-widescreen.25477
 
-Source code (game):
-	https://github.com/Selbi182/ERaZor
+Fan game pages:
+	SAGE    - https://sonicfangameshq.com/forums/showcase/sonic-erazor-8-2025.2385
+	itch.io - https://selbi.itch.io/sonic-erazor
 
-Source code (emulator):
-	https://github.com/Selbi182/Genesis-Plus-GX-Wide-Standalone
+Source code:
+	ROM hack - https://github.com/Selbi182/ERaZor
+	Emulator - https://github.com/Selbi182/Genesis-Plus-GX-Wide-Standalone
