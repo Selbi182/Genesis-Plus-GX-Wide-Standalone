@@ -1,7 +1,7 @@
   :root {
     --color-background: #223;
     --color-header: dodgerblue;
-    --color-body: #ddf;
+    --color-body: #eef;
     --color-link: steelblue;
     --color-link-active: deepskyblue;
   }
@@ -45,7 +45,7 @@
   }
   
   .thin {
-    font-weight: 100;
+    opacity: 0.5;
   }
 
   body {
@@ -184,7 +184,6 @@
     padding: 1rem;
     border-radius: 6px;
     transition: color 0.2s ease, background 0.2s ease;
-    vertical-align: sub;
   }
 
   .download-row:hover {
@@ -208,6 +207,12 @@
     font-size: 150%;
     font-weight: bold;
   }
+  
+  #current-version {
+    text-align: center;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
 
   #main {
     width: 100%;
@@ -222,8 +227,8 @@
   
   footer {
     text-align: center;
-    font-weight: 200;
     font-size: 90%;
+    opacity: 0.65;
   }
 
   table {
