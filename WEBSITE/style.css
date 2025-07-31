@@ -1,3 +1,19 @@
+  :root {
+    --color-background: #223;
+    --color-header: dodgerblue;
+    --color-body: #ddf;
+    --color-link: steelblue;
+    --color-link-active: deepskyblue;
+  }
+  
+  body.frantic {
+    --color-background: #322;
+    --color-header: orangered;
+    --color-body: #fee;
+    --color-link: crimson;
+    --color-link-active: red;
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -9,16 +25,16 @@
   }
 
   a, a:visited {
-    color: steelblue;
+    color: var(--color-link) !important;
   }
   
   a:hover {
-    color: deepskyblue;
+    color: var(--color-link-active) !important;
   }
 
   html, body {
-    background: #222;
-    color: white;
+    background: var(--color-background);
+    color: var(--color-body);
     font-weight: 0;
     font-style: normal;
 
@@ -45,7 +61,7 @@
     background:
       radial-gradient(circle, transparent 70%, #00000080 100%),
       linear-gradient(to bottom, transparent 0%, black 120%),
-      #223;
+      var(--color-background);
   }
   
   #sonic-upside-down {
@@ -81,6 +97,10 @@
     margin-bottom: 1rem;
   }
   
+  #overview-list {
+    list-style: disclosure-closed;
+  }
+  
   #links {
     width: fit-content;
   }
@@ -96,7 +116,7 @@
   }
 
   h1, h2, h3 {
-    color: dodgerblue;
+    color: var(--color-header);
     text-shadow: black 0.5rem 0.5rem 0.5rem;
   }
   
@@ -114,7 +134,7 @@
   
   h1 {
     font-size: 300% !important;
-    color: white;
+    color: var(--color-body);
   }
   
   h2 {
@@ -140,26 +160,53 @@
   #controls {
     width: fit-content;
   }
-  
-  #download {
-    text-align: center;
-  }
 
   #download h2 {
     margin-left: 0;
+    margin-bottom: 2rem;
+    text-align: center;
   }
 
-  #download a {
+  .download-list {
+    display: grid;
+    gap: 1rem;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+
+  .download-row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    vertical-align: sub;
+  }
+
+  .download-row:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .download-row img {
+    height: 50px;
+    width: auto;
+    justify-self: center;
+    filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
+  }
+
+  .download-row .version-main {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .download-row .version-name {
     font-size: 150%;
-    font-weight: normal;
-  }
-  
-  #download div:first-child a {
-    font-weight: bold;  
-  }
-
-  #download div {
-    margin: 1rem;
+    font-weight: bold;
   }
 
   #main {
@@ -200,6 +247,19 @@
       left: 0;
       right: 0;
     }
+
+    .download-row .version-main {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .download-row .version-name {
+      display: block;
+    }
+    
+    .windows-recommendation {
+      display: none;
+    }
   }
 
   .carousel-container {
@@ -220,7 +280,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 1s ease-in-out;
     image-rendering: pixelated;
     border-radius: 1rem;
   }
