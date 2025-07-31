@@ -4,325 +4,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>Sonic ERaZor &ndash; An explosive Sonic 1 ROM hack (Official Website)</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
 
-    a {
-      text-decoration: none;
-      transition: color 200ms;
-      font-weight: 400;
-    }
-
-    a, a:visited {
-      color: steelblue;
-    }
-    
-    a:hover {
-      color: deepskyblue;
-    }
-
-    html, body {
-      background: #222;
-      color: white;
-      font-weight: 0;
-      font-style: normal;
-
-      font-family: "Tomorrow", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 300;
-      font-style: normal;
-    }
-    
-    thin {
-      font-weight: 100;
-    }
-
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-direction: column;
-      font-size: 125% !important;
-      text-align: justify;
-      background:
-        radial-gradient(circle, transparent 70%, #00000080 100%),
-        linear-gradient(to bottom, transparent 0%, black 120%),
-        #223;
-    }
-    
-    #sonic-upside-down {
-      position: fixed;
-      top: 0;
-      right: 10rem;
-      z-index: 2;
-    }
-    
-    header {
-      width: 100%;
-    }
-     
-    @font-face {
-      font-family: "CrackedJohnnie";
-      src: url('CrackedJohnnie.woff2') format('woff2'),
-           url('CrackedJohnnie.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-    
-    .cracked-johnnie {
-      font-family: "CrackedJohnnie", sans-serif;
-    }
-
-    li {
-      margin-bottom: 1rem;
-    }
-    
-    #links {
-      width: fit-content;
-    }
-
-    #links li {
-      margin-bottom: 0;
-    }
-
-    h1, h2, h3 {
-      color: dodgerblue;
-      text-shadow: black 0.5rem 0.5rem 0.5rem;
-    }
-    
-    h1, h2 {
-      font-family: "CrackedJohnnie", sans-serif;
-    }
-    
-    header {
-        text-align: center;
-    }
-    
-    header p {
-      text-style: italic;
-    }
-    
-    h1 {
-      font-size: 300% !important;
-      color: white;
-    }
-    
-    h2 {
-      margin-top: 2rem;
-      font-size: 200% !important;
-      margin-left: -1rem;
-      font-weight: bold;
-    }
-
-    h3 {
-      font-size: 125% !important;
-    }
-    
-    #faq h3 {
-      margin-top: 2rem;
-      margin-bottom: -1rem;
-    }
-    
-    section {
-      width: 100%;
-    }
-    
-    #controls {
-      width: fit-content;
-    }
-    
-    #download {
-      text-align: center;
-    }
-
-    #download h2 {
-      margin-left: 0;
-    }
-
-    #download a {
-      font-size: 150%;
-      font-weight: bold;
-    }
-    
-    #download div {
-      margin: 1rem;
-    }
-
-    #main {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-direction: column;
-      max-width: min(60rem, 85vw);
-    }
-    
-    footer {
-      text-align: center;
-      font-weight: 200;
-    }
-
-    table {
-      border-spacing: 1rem 0;
-    }
-
-    @media only screen and (max-aspect-ratio: 3/2) {
-      body {
-        text-align: left;
-      }
-      
-      #sonic-upside-down {
-        position: relative;
-        top: 0;
-        left: 0;
-        right: 0;
-      }
-    }
-
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      margin: 0 auto;
-      overflow: hidden;
-      cursor: pointer;
-      margin: 2rem 0;
-      filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
-    }
-
-    .carousel-slide {
-      display: block;
-      width: 100%;
-      height: auto;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: opacity 0.5s ease;
-      image-rendering: pixelated;
-      border-radius: 1rem;
-    }
-
-    .carousel-container .carousel-slide:first-child {
-      position: relative;
-    }
-
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 1;
-    }
-  }
-  </style>
-
-  <script>
-    window.onload = () => {
-      const slides = document.querySelectorAll('.carousel-slide');
-      let current = 0;
-
-      function showNextSlide() {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-      }
-
-      let interval;
-      function resetInterval() {
-        clearInterval(interval);
-        interval = setInterval(showNextSlide, 4000);  
-      }
-      resetInterval();
-      
-      document.querySelector("#carousel").onclick = () => {
-        resetInterval();
-        showNextSlide();
-      };
-    };    
-  </script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="meme/explosion.js" defer></script>
+  <script src="main.js" defer></script>
   
+  <!-- Google Analytics -->
+  <script type="text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4VY3DTLHVH');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4VY3DTLHVH"></script>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@100;200;300;400&display=swap" rel="stylesheet">
 
+  <!-- Meta Tags -->
   <meta name="description" content="Sonic ERaZor is chaotic, cinematic, explosive ROM hack of Sonic the Hedgehog (16-bit) – 15 years in the making!">
   <meta name="keywords" content="Sonic ERaZor, Sonic the Hedgehog, Sonic fan game, Sonic ROM hack, Sega Mega Drive, Sega Genesis, Sonic 1 mod, Michael Bay">
   <meta name="author" content="Selbi">
-
   <meta property="og:title" content="Sonic ERaZor – Official Website">
   <meta property="og:description" content="Sonic ERaZor is chaotic, cinematic, explosive ROM hack of Sonic the Hedgehog (16-bit) – 15 years in the making!">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sonic-erazor.selbi.club">
-  <meta property="og:image" content="https://sonic-erazor.selbi.club/img/thumb.png">
-
+  <meta property="og:image" content="https://sonic-erazor.selbi.club/screenshots/thumb.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sonic ERaZor – Official Site">
   <meta name="twitter:description" content="Sonic ERaZor is chaotic, cinematic, explosive ROM hack of Sonic the Hedgehog (16-bit) – 15 years in the making!">
-  <meta name="twitter:image" content="https://sonic-erazor.selbi.club/img/thumb.png">
-
+  <meta name="twitter:image" content="https://sonic-erazor.selbi.club/screenshots/thumb.png">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="https://sonic-erazor.selbi.club/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="https://sonic-erazor.selbi.club/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="https://sonic-erazor.selbi.club/favicon.ico">
   <link rel="manifest" href="site.webmanifest">
-
   <link rel="canonical" href="https://sonic-erazor.selbi.club">
 </head>
 
 <body>
 <div id="main">
-  <img id="sonic-upside-down" src="sonic-upside-down.gif" alt="Why is Sonic upside down?">
+  <img id="sonic-upside-down" src="meme/sonic-upside-down.gif" alt="" title="DON'T CLICK ON SONIC! NO! DON'T DO IT!!!">
 
   <header>
     <h1>Sonic ERaZor</h1>
-    <p>A chaotic, cinematic, explosive ROM hack of Sonic the Hedgehog (16-bit) &mdash; 15 years in the making!</p>
+    <p>A chaotic, cinematic, explosive ROM hack of Sonic the Hedgehog&trade; (16-bit) &mdash; 15 years in the making!</p>
         
     <div id="carousel">
       <div class="carousel-container" title="Cycle through Screenshots">
-        <img src="img/title.png" class="carousel-slide active">
-        <img src="img/00.png" class="carousel-slide">
-        <img src="img/01.png" class="carousel-slide">
-        <img src="img/02.png" class="carousel-slide">
-        <img src="img/03.png" class="carousel-slide">
-        <img src="img/04.png" class="carousel-slide">
-        <img src="img/05.png" class="carousel-slide">
-        <img src="img/06.png" class="carousel-slide">
-        <img src="img/07.png" class="carousel-slide">
-        <img src="img/08.png" class="carousel-slide">
-        <img src="img/09.png" class="carousel-slide">
-        <img src="img/10.png" class="carousel-slide">
-        <img src="img/11.png" class="carousel-slide">
-        <img src="img/12.png" class="carousel-slide">
-        <img src="img/13.png" class="carousel-slide">
-        <img src="img/14.png" class="carousel-slide">
-        <img src="img/15.png" class="carousel-slide">
-        <img src="img/16.png" class="carousel-slide">
-        <img src="img/17.png" class="carousel-slide">
+        <img src="screenshots/title.png" class="carousel-slide active">
+        <img src="screenshots/00.png" class="carousel-slide">
+        <img src="screenshots/01.png" class="carousel-slide">
+        <img src="screenshots/02.png" class="carousel-slide">
+        <img src="screenshots/03.png" class="carousel-slide">
+        <img src="screenshots/04.png" class="carousel-slide">
+        <img src="screenshots/05.png" class="carousel-slide">
+        <img src="screenshots/06.png" class="carousel-slide">
+        <img src="screenshots/07.png" class="carousel-slide">
+        <img src="screenshots/08.png" class="carousel-slide">
+        <img src="screenshots/09.png" class="carousel-slide">
+        <img src="screenshots/10.png" class="carousel-slide">
+        <img src="screenshots/11.png" class="carousel-slide">
+        <img src="screenshots/12.png" class="carousel-slide">
+        <img src="screenshots/13.png" class="carousel-slide">
+        <img src="screenshots/14.png" class="carousel-slide">
+        <img src="screenshots/15.png" class="carousel-slide">
+        <img src="screenshots/16.png" class="carousel-slide">
+        <img src="screenshots/17.png" class="carousel-slide">
       </div>
     </div>
   </header>
-
+  <hr>
   <section id="download">
-    <div><a href="https://selbi.hapisan.com/erazor/zenith">Download <span class="cracked-johnnie">Zenith Edition</span> (2.6 MB)</a><br>Standalone EXE, Windows &mdash; RECOMMENDED</div>
-    <div><thin><a href="https://selbi.hapisan.com/erazor">Download Standard 4:3 ROM (647 KB)</a><br>Compatible with any Mega Drive emulator and real hardware</thin></div>
-    <div><thin><a href="https://selbi.hapisan.com/erazor/widescreen">Download Widescreen 16:9 ROM (1.29 MB)</a><br>Only compatible with RetroArch using the <i>Genesis Plus GX Wide</i> core</thin></div>
+    <div><a href="https://selbi.hapisan.com/erazor/zenith">Download <span class="cracked-johnnie">Zenith Edition</span> (2.6 MB)</a><br>Standalone EXE, Windows (64-bit) &mdash; RECOMMENDED</div>
+    <div><span class="thin"><a href="https://selbi.hapisan.com/erazor">Download Standard 4:3 ROM (647 KB)</a><br>Compatible with any Mega Drive emulator and real hardware</span></div>
+    <div><span class="thin"><a href="https://selbi.hapisan.com/erazor/widescreen">Download Widescreen 16:9 ROM (1.29 MB)</a><br>Only compatible with RetroArch using the <i>Genesis Plus GX Wide</i> core</span></div>
   </section>
-
+  <hr>
   <section id="about">
     <h2>About</h2>
     <p><strong>Sonic ERaZor</strong> is a complete reinvention of Sonic 1 for the Sega Mega Drive: a chaotic, cinematic,
     and often absurd remix that throws out most of the original game's rules in favor of unpredictable
-    spectacle. It's been described as <strong>"What if Michael Bay* directed Sonic 1?"</strong> due to its very generous
+    spectacle. Fans of the game have been describing it as <strong>"What if Michael Bay* directed Sonic 1?"</strong> due to its very generous
     use of explosions.</p>
     
-    <p><thin>* Disclaimer: the creator has never seen a single Michael Bay movie in his life.</thin></p>
+    <p><span class="thin">* Disclaimer: the creator has never seen a single Michael Bay movie in his entire life.</span></p>
 
-    <p>Originally released in 2010, ERaZor began as a messy, punishingly hard ROM hack. Since then it has evolved into a carefully balanced, polished, and highly replayable full-game experience. It won first place in the annual <i>Sonic Hacking Contest</i> twice &mdash; once in 2012 and again in 2024.</p>
+    <p>Originally released in 2010, ERaZor began as a messy, punishingly hard ROM hack. Since then, it has evolved into a carefully balanced, polished, and highly replayable full-game experience. It won first place in the annual <i>Sonic Hacking Contest</i> twice &mdash; once in 2012 and again in 2024.</p>
 
     <p>Whether you're here for secrets, speedrunning, or just pure chaos: this game is built to give you
     a good time with lots of replay value!</p>
@@ -330,7 +100,7 @@
     <h3>Overview</h3>
     <ul>
       <li><strong>8 Unique Levels:</strong><br>Inspired and based on the original Sonic 1 levels, each one comes with its own gimmick, theme, and challenge</li>
-      <li><strong>2 Unique Difficulties:</strong><br>"Casual Mode" and "Frantic Mode", both being delicately handcrafted and wildly different experiences to allow everyone to get started with the game while also rewarding practice!</li>
+      <li><strong>2 Unique Difficulties:</strong><br><span class="cracked-johnnie">Casual</span> and <span class="cracked-johnnie">Frantic</span>, both being delicately handcrafted and wildly different experiences to allow everyone to get started with the game while also rewarding practice!</li>
       <li><strong>Crazy Mechanics:</strong><br>From Inhuman Mode to Space Golf, from lethal cinematic black bars to intense escape sequences; this isn't a typical Sonic game anymore</li>
       <li><strong>Cinematic Flair:</strong><br>Lots of cutscenes, stylized transitions, visual effects, and story text screens that aren't shy to break the fourth wall and give you a good laugh</li>
       <li><strong>Tons of Secrets:</strong><br>Unlockables, alternate endings, and easter eggs (some obvious, some <i>very</i> hidden)</li>
@@ -338,20 +108,19 @@
     </ul>
     <p>For even more info, check out the official <a href="https://info.sonicretro.org/Sonic_ERaZor" target="_blank">Sonic Retro wiki page</a>!</p>
   </section>
-
+  <hr>
   <section id="zenith">
     <h2>Zenith Edition</h2>
     <p><strong>Sonic ERaZor: Zenith Edition</strong> is a port of the ROM hack as a standalone, self-contained
-    Microsoft Windows EXE file. It's bundled with a custom Sega Mega Drive emulator to play the
+    Microsoft Windows EXE file, released in 2025. It's bundled with a custom Sega Mega Drive emulator to play the
     game in glorious 16:9 widescreen with various enhancements not available on the original hardware.</p>
 
-    <p>For 15 years, ERaZor was only available as a ROM file, which meant you had to provide your own
+    <p>For 15 years, ERaZor was only available as a ROM, which meant you had to bring your own
     emulator. The widescreen version was especially finicky, as it only worked through RetroArch with
-    the "Genesis Plus GX Wide" core, which was daunting for anyone unfamiliar with it.
-    This special edition fixes this: no setup necessary, just download and begin playing right away!</p>
+    a specific core. This special edition fixes this: no setup necessary, just download and begin playing right away!</p>
 
     <p><strong>Huge thanks</strong> to <i>heyjoeway</i> for their  <a href="https://jojudge.com/s2cx" target="_blank">Sonic 2 Community Cut</a> emulator powering this port
-    (which is itself a fork of Genesis Plus GX). It needed a few modifications to make ERaZor work flawlessly, but the majority of the heavy lifting was already done.</p>
+    (which is itself a fork of <i>Genesis Plus GX</i>). It needed a few modifications to make ERaZor work flawlessly, but the majority of the heavy lifting was already done.</p>
   </section>
 
   <section id="controls">
@@ -376,13 +145,13 @@
       </tbody>
     </table>
   </section>
-
+  <hr>
   <section id="faq">
     <h2>FAQ</h2>
     
     <h3>Which version should I play?</h3>
-    <p>If you are on Windows 10/11, go with Zenith Edition for the most optimal experience. If you aren't on Windows, there's a good chance that it'll work anyway &mdash; I've got confirmation that it works flawlessly on a Steam Deck via Proton.
-    <br><br>If you want the old-school experience, go with the Standard 4:3 ROM, which is compatible with almost every Sega Mega Drive emulator out there and even real hardware! Finally, if you are a RetroArch user, go with the Widescreen 16:9 ROM (note that it requires the <i>Genesis Plus GX Wide</i> core).
+    <p>If you are on Windows 10/11, go with the <i>Zenith Edition</i> for the most optimal experience. If you aren't on Windows, there's a good chance that it'll work anyway &mdash; I've got confirmation that it works flawlessly on a Steam Deck via Proton.
+    <br><br>If that isn't an option or if you want the old-school experience, go with the Standard 4:3 ROM, which is compatible with almost every Sega Mega Drive emulator out there and even real hardware!<br><br>If you are a RetroArch user, go with the Widescreen 16:9 ROM (requires the <i>Genesis Plus GX Wide</i> core with sprite limits disabled).
     
     <h3>What's up with the name?</h3>
     <p>The name <i>ERaZor</i>, with its uppercase and lowercase letters, has a long and complex history. It's a mix of the word <i>Eraser</i> and the German word <i>Scherz</i> (meaning "joke" in English). Despite the naming similarities, it has nothing to do with <i>Erazor Djinn</i> or the obscure game <i>Sonic Eraser</i>.
@@ -392,12 +161,15 @@
     <p>The entire soundtrack is exclusively made up of ports from other popular games, most notably the <i>Mega Man</i> series. Check out the in-game Sound Test or <a href="https://info.sonicretro.org/Sonic_ERaZor#Music">the Wiki</a> for all sources!</p>
     
     <h3>Where can I learn more about the development history?</h3>
-    <p>You can check out <a href="https://www.youtube.com/playlist?list=PLXWKkMpxgSyZIupEZqeV-mb1hEEePxkzR">ERZathon</a>, my developer marathon through all eight releases of the game!</p>
+    <p>You can check out <a href="https://www.youtube.com/playlist?list=PLXWKkMpxgSyZIupEZqeV-mb1hEEePxkzR">ERZathon</a> on YouTube, my developer playthrough marathon of all eight releases of the game released between 2010 and 2025!</p>
     
     <h3>Why is Sonic upside-down?</h3>
     <p><a href="https://www.youtube.com/watch?v=aRSH809Qass">It's a long story...</a></p>
+    
+    <h3>What's the name of this edgy font?</h3>
+    <p>It's called <a href="https://www.dafont.com/cracked-johnnie.font" class="cracked-johnnie">Cracked Johnnie</a>, designed by Dimitris Kolyris.</p>
   </section>
-
+  <hr>
   <section id="credits">
     <h2>Credits</h2>
     <ul>
@@ -414,7 +186,7 @@
       iojnekns, Jorge, MainMemory, Peanut Noceda, redhotsonic, RobiWanKenobi, Tongara</li>
     </ul>
   </section>
-
+  <hr>
   <section id="links">
     <h2>Further Links</h2>
     <ul>
@@ -428,15 +200,14 @@
       <li><a href="https://github.com/Selbi182/Genesis-Plus-GX-Wide-Standalone">Source code (Zenith Edition emulator)</a></li>
     </ul>
   </section>
-
+  <hr>
   <footer>
     <p>
       <strong>Sonic ERaZor</strong> &copy; 2010 &ndash; 2025 Selbi<br>
-      <strong>Sonic the Hedgehog&trade;</strong> and related IP &copy; SEGA<br>
-      <strong>Cracked Johnnie</strong> font &copy; 2006 Dimitris Kolyris</p>
+      <strong>Sonic the Hedgehog&trade;</strong> &copy; SEGA<br>
     <p><footer>
     <p>
-      This is a non-commercial, fan-made project created for educational and entertainment purposes only.<br>
+      Sonic ERaZor is a fan-made, non-commercial project created for entertainment purposes only.<br>
       It is not affiliated with, endorsed by, or sponsored by SEGA in any way.
     </p>
   </footer>

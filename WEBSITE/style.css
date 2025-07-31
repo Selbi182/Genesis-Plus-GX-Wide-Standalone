@@ -1,0 +1,236 @@
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    transition: color 200ms;
+    font-weight: 400;
+  }
+
+  a, a:visited {
+    color: steelblue;
+  }
+  
+  a:hover {
+    color: deepskyblue;
+  }
+
+  html, body {
+    background: #222;
+    color: white;
+    font-weight: 0;
+    font-style: normal;
+
+    font-family: "Tomorrow", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .thin {
+    font-weight: 100;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    font-size: 125% !important;
+    text-align: justify;
+    background:
+      radial-gradient(circle, transparent 70%, #00000080 100%),
+      linear-gradient(to bottom, transparent 0%, black 120%),
+      #223;
+  }
+  
+  #sonic-upside-down {
+    position: fixed;
+    top: 0;
+    right: 5%;
+    z-index: 2;
+    cursor: pointer;
+    image-rendering: pixelated;
+  }
+  
+  #sonic-upside-down.exploded {
+    cursor: initial;
+  }
+  
+  header {
+    width: 100%;
+  }
+   
+  @font-face {
+    font-family: "CrackedJohnnie";
+    src: url('fonts/CrackedJohnnie.woff2') format('woff2'),
+         url('fonts/CrackedJohnnie.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .cracked-johnnie {
+    font-family: "CrackedJohnnie", sans-serif;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
+  
+  #links {
+    width: fit-content;
+  }
+
+  #credits ul, #links ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: left;
+  }
+
+  #links li {
+    margin-bottom: 0;
+  }
+
+  h1, h2, h3 {
+    color: dodgerblue;
+    text-shadow: black 0.5rem 0.5rem 0.5rem;
+  }
+  
+  h1, h2 {
+    font-family: "CrackedJohnnie", sans-serif;
+  }
+  
+  header {
+      text-align: center;
+  }
+  
+  header p {
+    text-style: italic;
+  }
+  
+  h1 {
+    font-size: 300% !important;
+    color: white;
+  }
+  
+  h2 {
+    margin-top: 2rem;
+    font-size: 200% !important;
+    margin-left: -1rem;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 125% !important;
+  }
+  
+  #faq h3 {
+    margin-top: 2rem;
+    margin-bottom: -1rem;
+  }
+  
+  section {
+    width: 100%;
+  }
+  
+  #controls {
+    width: fit-content;
+  }
+  
+  #download {
+    text-align: center;
+  }
+
+  #download h2 {
+    margin-left: 0;
+  }
+
+  #download a {
+    font-size: 150%;
+    font-weight: normal;
+  }
+  
+  #download div:first-child a {
+    font-weight: bold;  
+  }
+
+  #download div {
+    margin: 1rem;
+  }
+
+  #main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: min(60rem, 85vw);
+  }
+  
+  footer {
+    text-align: center;
+    font-weight: 200;
+    font-size: 90%;
+  }
+
+  table {
+    border-spacing: 1rem 0;
+    margin-bottom: 1rem;
+  }
+  
+  hr {
+    width: 100%;
+    opacity: 0.5;
+  }
+
+  @media only screen and (max-aspect-ratio: 3/2) {
+    body {
+      text-align: left;
+    }
+    
+    #sonic-upside-down {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2rem 0;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
+  }
+
+  .carousel-slide {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+    image-rendering: pixelated;
+    border-radius: 1rem;
+  }
+
+  .carousel-container .carousel-slide:first-child {
+    position: relative;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+  }
+}
