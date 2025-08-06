@@ -1,10 +1,19 @@
 window.addEventListener("load", function() {
+  
+  // Screenshot Carousel
   const slides = document.querySelectorAll('.carousel-slide');
+  document.querySelector("#carousel-page-total").innerHTML = slides.length;
+
   let current = 0;
 
-  function showNextSlide() {
+  function showNextSlide(prev = false) {
     slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
+    if (prev) {
+      current = (current - 1) < 0 ? slides.length - 1 : current - 1;
+    } else {
+      current = (current + 1) % slides.length;
+    }
+    document.querySelector("#carousel-page-current").innerHTML = current + 1;
     slides[current].classList.add('active');
   }
 
@@ -15,11 +24,22 @@ window.addEventListener("load", function() {
   }
   resetInterval();
   
-  document.querySelector("#carousel").onclick = () => {
+  function manualSlideChange(prev = false) {
     resetInterval();
-    showNextSlide();
+    showNextSlide(prev);
+  }
+  
+  document.querySelector("#carousel .carousel-container").onclick = () => {
+    manualSlideChange();
+  };
+  document.querySelector("#carousel-prev").onclick = () => {
+    manualSlideChange(true);
+  };
+  document.querySelector("#carousel-next").onclick = () => {
+    manualSlideChange();
   };
 
+  // Meme when clicking on Sonic gif
   let explosion = new Image();
   explosion.src = "meme/explosion.gif?" + Math.random();
   let sfx = new Audio("meme/explosion.ogg");

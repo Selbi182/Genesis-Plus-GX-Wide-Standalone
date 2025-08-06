@@ -1,3 +1,15 @@
+  * {
+    box-sizing: border-box;
+  }
+  
+  @font-face {
+    font-family: "CrackedJohnnie";
+    src: url('fonts/CrackedJohnnie.woff2') format('woff2'),
+         url('fonts/CrackedJohnnie.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+ 
   :root {
     --color-background: #223;
     --color-header: dodgerblue;
@@ -14,16 +26,12 @@
     --color-link-active: red;
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
   a {
     text-decoration: none;
     transition: color 200ms;
     font-weight: 400;
   }
-
+  
   a, a:visited {
     color: var(--color-link) !important;
   }
@@ -44,10 +52,6 @@
     font-style: normal;
   }
   
-  .thin {
-    opacity: 0.5;
-  }
-
   body {
     width: 100%;
     height: 100%;
@@ -71,49 +75,38 @@
     z-index: 2;
     cursor: pointer;
     image-rendering: pixelated;
+    user-select: none;
   }
   
   #sonic-upside-down.exploded {
     cursor: initial;
   }
   
-  header {
-    width: 100%;
-  }
-   
-  @font-face {
-    font-family: "CrackedJohnnie";
-    src: url('fonts/CrackedJohnnie.woff2') format('woff2'),
-         url('fonts/CrackedJohnnie.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  .thin {
+    opacity: 0.5;
   }
   
   .cracked-johnnie {
     font-family: "CrackedJohnnie", sans-serif;
   }
 
-  li {
+  table {
+    border-spacing: 1rem 0;
     margin-bottom: 1rem;
   }
   
-  #overview-list {
-    list-style: disclosure-closed;
+  hr {
+    width: 100%;
+    opacity: 0.5;
   }
   
-  #links {
-    width: fit-content;
+  li {
+    margin-bottom: 1rem;
   }
 
-  #credits ul, #links ul {
-    padding: 0;
-    list-style-type: none;
-    text-align: left;
-  }
-
-  #links li {
-    margin-bottom: 0;
-  }
+  header {
+    width: 100%;
+  } 
 
   h1, h2, h3 {
     color: var(--color-header);
@@ -124,13 +117,6 @@
     font-family: "CrackedJohnnie", sans-serif;
   }
   
-  header {
-      text-align: center;
-  }
-  
-  header p {
-    text-style: italic;
-  }
   
   h1 {
     font-size: 300% !important;
@@ -148,19 +134,88 @@
     font-size: 125% !important;
   }
   
-  #faq h3 {
-    margin-top: 2rem;
-    margin-bottom: -1rem;
-  }
-  
   section {
     width: 100%;
   }
+
+  header {
+    text-align: center;
+  }
   
-  #controls {
-    width: fit-content;
+  header p {
+    text-style: italic;
   }
 
+  #main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: min(60rem, 85vw);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 2rem 0;
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
+    user-select: none;
+  }
+
+  .carousel-slide {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+    image-rendering: pixelated;
+    border-radius: 1rem;
+  }
+
+  .carousel-container .carousel-slide:first-child {
+    position: relative;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  #carousel-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+  
+  #carousel-page {
+    width: 5rem;
+    font-weight: bold;
+  }
+  
+  #carousel-prev, #carousel-next {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    font-size: 200%;
+  }
+  
+  #carousel-prev:hover, #carousel-next:hover {
+    opacity: 1.0;
+  }
+    
   #download h2 {
     margin-left: 0;
     margin-bottom: 2rem;
@@ -213,32 +268,54 @@
     opacity: 0.5;
     margin-bottom: 1rem;
   }
-
-  #main {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    max-width: min(60rem, 85vw);
+  
+  #overview-list {
+    list-style: disclosure-closed;
+  }
+ 
+  #trailer iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
   }
   
+  #controls {
+    width: fit-content;
+  }
+ 
+  #faq h3 {
+    margin-top: 2rem;
+    margin-bottom: -1rem;
+  }
+
+  #credits ul {
+    font-size: 90%;
+    opacity: 0.65;
+    padding: 0;
+    list-style-type: none;
+    text-align: left;
+    margin: 0 10%;
+  }
+ 
+  #links {
+    width: fit-content;
+  }
+
+  #links ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+  }
+
+  #links li {
+    margin-bottom: 0;
+    padding: 0.25rem;
+  }
+
   footer {
     text-align: center;
     font-size: 90%;
     opacity: 0.65;
-  }
-
-  table {
-    border-spacing: 1rem 0;
-    margin-bottom: 1rem;
-  }
-  
-  hr {
-    width: 100%;
-    opacity: 0.5;
   }
 
   @media only screen and (max-aspect-ratio: 3/2) {
@@ -265,37 +342,5 @@
     .windows-recommendation {
       display: none;
     }
-  }
-
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-    cursor: pointer;
-    margin: 2rem 0;
-    filter: drop-shadow(0.5rem 0.5rem 0.5rem black);
-  }
-
-  .carousel-slide {
-    display: block;
-    width: 100%;
-    height: auto;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 1s ease-in-out;
-    image-rendering: pixelated;
-    border-radius: 1rem;
-  }
-
-  .carousel-container .carousel-slide:first-child {
-    position: relative;
-  }
-
-  .carousel-slide.active {
-    opacity: 1;
-    z-index: 1;
   }
 }
