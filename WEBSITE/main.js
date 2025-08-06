@@ -20,10 +20,21 @@ window.addEventListener("load", function() {
   let interval;
   function resetInterval() {
     clearInterval(interval);
-    interval = setInterval(showNextSlide, 5000);  
+    interval = setInterval(showNextSlide, 4000);  
   }
-  resetInterval();
   
+  // Automatically start carousel once it's visible
+  new IntersectionObserver(([entry], observer) => {
+    if (entry.isIntersecting) {
+      resetInterval();
+      observer.unobserve(entry.target);
+      console.log('Screenshot carousel started');
+    }
+  }, {
+    threshold: 0.1
+  }).observe(document.querySelector('#carousel'));
+  
+  // Manual slide changing
   function manualSlideChange(prev = false) {
     resetInterval();
     showNextSlide(prev);

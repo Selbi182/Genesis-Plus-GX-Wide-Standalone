@@ -203,6 +203,7 @@
   #carousel-page {
     width: 5rem;
     font-weight: bold;
+    text-align: center;
   }
   
   #carousel-prev, #carousel-next {
