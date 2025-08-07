@@ -1,5 +1,5 @@
 window.addEventListener("load", function() {
-  
+
   // Screenshot Carousel
   const slides = document.querySelectorAll('.carousel-slide');
   document.querySelector("#carousel-page-total").innerHTML = slides.length;
