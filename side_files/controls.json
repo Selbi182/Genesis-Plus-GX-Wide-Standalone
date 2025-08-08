@@ -2,14 +2,15 @@
     "binds": {
         "controller": {
             "1": {
-                "1": ["pad_1_a"],
-                "2": ["pad_1_b"],
+                "2": ["pad_1_a"],
+                "1": ["pad_1_b"],
                 "3": ["pad_1_c"],
                 "7": ["pad_1_start"],
                 "12": ["pad_1_up"],
                 "13": ["pad_1_down"],
                 "14": ["pad_1_left"],
-                "15": ["pad_1_right"]
+                "15": ["pad_1_right"],
+                "5": ["fullscreen"] 
             }
         },
         "keyboard": { 

@@ -45,55 +45,66 @@ passion, experimentation, and community feedback. Have fun!
 What is the "Zenith Edition"?
 ================================
 
-Sonic ERaZor: Zenith Edition is a port of the Sonic 1 ROM hack "Sonic ERaZor 8.1" as a standalone,
-self-contained Microsoft Windows EXE file. It runs on a custom Sega Mega Drive emulator to play the
-game in glorious 16:9 widescreen with enhancements not available on the original hardware.
+Sonic ERaZor: Zenith Edition is a port of the ROM hack as a standalone, self-contained EXE file,
+released in 2025. It's compiled with a custom SEGA Mega Drive emulator to play the game in glorious
+16:9 widescreen with various enhancements not available on the original hardware.
 
-For 15 years, ERaZor was only available as a ROM file, which meant you had to provide your own
-emulator. The widescreen version was especially finicky, as it only worked through RetroArch with
-the "Genesis Plus GX Wide" core, which was daunting for anyone unfamiliar with it.
-
+For 15 years, ERaZor was only available as a ROM, which meant you had to bring your own emulator.
+The widescreen version was especially finicky, as it only worked through RetroArch with aspecific core.
 This special edition fixes this: no setup necessary, just download and begin playing right away!
 
-Huge thanks go out to heyjoeway for their "Sonic 2 Community Cut" emulator powering this port
-(which is itself a fork of Genesis Plus GX). It needed a few modifications to make ERaZor work
-flawlessly, but the majority of the heavy lifting was already done. You can find it here:
+Huge thanks to heyjoeway for their "Sonic 2 Community's Cut" emulator powering this port (which is
+itself a fork of Genesis Plus GX). It needed a few modifications to make ERaZor work flawlessly,
+but the majority of the heavy lifting was already done. You can find it here:
 https://jojudge.com/s2cx
 
 
 ================================
-Controls
+Default Controls
 ================================
 
 Keyboard Key -> In-Game Button
 
-           A -> A (various special moves)
+           D -> C (jump, homing attack)
            S -> B (jump, double jump)
-           D -> C (jump, jump dash, homing attack)
-       Enter -> START (pause game)
+           A -> A (special moves)
   Arrow Keys -> D-Pad (move)
+       Enter -> START (pause game)
 
          F11 -> Toggle Fullscreen
          TAB -> Restart Game
          ESC -> Quit Game
 
-All bindings can be customized in the "controls.json" file.
-Basic controller support is also available (Xbox controllers will usually work without setup).
+---
+
+Xbox Controller -> In-Game Button
+
+           B -> C (jump, homing attack)
+           A -> B (jump, double jump)
+           X -> A (special moves)
+  Left Stick -> D-Pad (move)
+       Start -> START (pause game)
+      Select -> Toggle Fullscreen
+
+Note:
+	I only had had the chance to test with an Xbox 360 controller, but in theory
+	controller support is available for every common controller on the market.
+	Just in case, all bindings can be customized in the "controls.json" file!
 
 
 ================================
 Credits
 ================================
 
-Project Lead, Main Programming, Level Design, Writing:
+Project Lead, Game Design, Main Programming, Level Design, Writing, Web Design:
 	Selbi
 
-Engine Programming, Engine Optimizations, Sound Driver, Special Screens:
+Engine Programming, Optimizations, Sound Driver, Sound Test, Save Select:
 	vladikcomper
 
-Widescreen Support:
-	vladikcomper (ROM)
-	heyjoeway (emulator)
+16:9 Widescreen Support:
+	vladikcomper (ROM modifications for widescreen)
+	heyjoeway (Sonic 2 Community's Cut emulator, forked for Zenith Edition)
 
 Assistant Development:
 	fuzzy
@@ -101,14 +112,12 @@ Assistant Development:
 Additional Graphics:
 	Javesike
 	zakku
-	VAdaPEGA
 	MarkeyJester
 
 Music Ports:
 	amphobius aka. DalekSam
 	Spanner
 	Eduardo Knuckles
-	Selbi
 
 Design Advice, Hardware Testing:
 	Chaotic SoFa
@@ -121,24 +130,40 @@ Legacy Beta Testing:
 	neonsynth aka. SonicVaan
 
 Special Thanks:
-	CarrascoZX0, cloudiar, Craze, DeoxysKyogre, FraGag, Giovanni, Give, Irixion,
-	iojnekns, Jorge, MainMemory, Peanut Noceda, redhotsonic, Tongara, VAdaPEGA
+	CarrascoZX0, cloudiar, Craze, DeoxysKyogre, FraGag, Giovanni, Give, Irixion, iojnekns,
+	Jorge, MainMemory, Peanut Noceda, redhotsonic, RobiWanKenobi, Tongara, VAdaPEGA
 
 
 ================================
 Further Links
 ================================
 
-Sonic Retro wiki page - full info and development history:
+Official Sonic ERaZor Homepage:
+	https://sonic-erazor.selbi.club
+
+Sonic Retro Wiki:
 	https://info.sonicretro.org/Sonic_ERaZor
 
-Forum thread - announcements and community discussion:
+Forum Thread:
 	https://forums.sonicretro.org/threads/sonic-erazor-8-2025-now-in-widescreen.25477
 
-Fan game pages:
-	SAGE    - https://sonicfangameshq.com/forums/showcase/sonic-erazor-8-2025.2385
-	itch.io - https://selbi.itch.io/sonic-erazor
+TVTropes page:
+	https://tvtropes.org/pmwiki/pmwiki.php/VideoGame/SonicErazor
 
-Source code:
-	ROM hack - https://github.com/Selbi182/ERaZor
-	Emulator - https://github.com/Selbi182/Genesis-Plus-GX-Wide-Standalone
+SFGHQ page:
+	https://sonicfangameshq.com/forums/showcase/sonic-erazor-8-2025.2385
+
+itch.io page:
+	https://selbi.itch.io/sonic-erazor
+
+Gamebanana page:
+	https://gamebanana.com/mods/608209
+
+Steam Workshop page:
+	https://steamcommunity.com/sharedfiles/filedetails/?id=674699953
+
+Source code (ROM hack):
+	https://github.com/Selbi182/ERaZor
+
+Source code (Zenith emulator):
+	https://github.com/Selbi182/Genesis-Plus-GX-Wide-Standalone
