@@ -61,7 +61,7 @@ STATIC_ASSERT(z80_overflow,
               Z80_MAX_CYCLES <= UINT_MAX >> (Z80_OVERCLOCK_SHIFT + 1));
 #endif
 
-#define FRAMERATE_TARGET  59.92
+#define FRAMERATE_TARGET  60.00
 
 /* Some games appear to calibrate music playback speed for PAL/NTSC by
    actually counting CPU cycles per frame during startup, resulting in
@@ -148,28 +148,6 @@ void sram_write() {
     }
   }
 
-  if (system_hw == SYSTEM_MCD) {
-    /* save internal backup RAM (if formatted) */
-    if (!memcmp(scd.bram + 0x2000 - 0x20, brm_format + 0x20, 0x20)) {
-      fp = fopen(PATH_SRAM_ROOT "scd.brm", "wb");
-      if (fp!=NULL) {
-        fwrite(scd.bram, 0x2000, 1, fp);
-        fclose(fp);
-      }
-    }
-
-    /* save cartridge backup RAM (if formatted) */
-    if (scd.cartridge.id) {
-      if (!memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20)) {
-        fp = fopen(PATH_SRAM_ROOT "cart.brm", "wb");
-        if (fp!=NULL) {
-          fwrite(scd.cartridge.area, scd.cartridge.mask + 1, 1, fp);
-          fclose(fp);
-        }
-      }
-    }
-  }
-
 	#ifdef __EMSCRIPTEN__
 		EM_ASM(
 			FS.syncfs(function (err) { console.log(err); });
@@ -198,8 +176,7 @@ void mainloop() {
   #endif
   Backend_Video_Clear();
 
-  if (system_hw == SYSTEM_MCD) system_frame_scd(0);
-  else if ((system_hw & SYSTEM_PBC) == SYSTEM_MD) system_frame_gen(0);
+  if ((system_hw & SYSTEM_PBC) == SYSTEM_MD) system_frame_gen(0);
   else system_frame_sms(0);
 
   Backend_Video_Update();
@@ -232,29 +209,6 @@ char *get_valid_filepath_jsonarray(json_t *patharr) {
   }
   return NULL;
 }
-
-/*
-char *get_rom_path() {
-  // Ensure config.rom exists
-  json_t *config_rom = json_object_get(config_json, "rom");
-  if (config_rom == NULL) return NULL;
-
-  json_t *config_rompaths = json_object_get(config_rom, "paths");
-  return get_valid_filepath_jsonarray(config_rompaths);
-}
-*/
-
-/*
-char *get_diff_path() {
-  // Ensure config.rom exists
-  json_t *config_rom = json_object_get(config_json, "rom");
-  if (config_rom == NULL) return NULL;
-
-  // Ensure config.rom.paths_patch exists
-  json_t *config_patchpaths = json_object_get(config_rom, "paths_patch");
-  return get_valid_filepath_jsonarray(config_patchpaths);
-}
-*/
 
 int main (int argc, char *argv[]) {
   char *rom_path = "romdata.dat";
@@ -299,52 +253,6 @@ int main (int argc, char *argv[]) {
   /* set default config */
   error_init();
   config_load(config_path);
-
-  //if (!rom_path) rom_path = get_rom_path();
-  //if (!diff_path) diff_path = get_diff_path();
-
-  /* Genesis BOOT ROM support (2KB max) */
-  memset(boot_rom, 0xFF, 0x800);
-  FILE *fp = fopen(MD_BIOS, "rb");
-  if (fp != NULL) {
-    /* read BOOT ROM */
-    fread(boot_rom, 1, 0x800, fp);
-    fclose(fp);
-
-    /* check BOOT ROM */
-    if (!memcmp((char *)(boot_rom + 0x120),"GENESIS OS", 10))
-      system_bios = SYSTEM_MD; /* mark Genesis BIOS as loaded */
-
-    /* Byteswap ROM */
-    for (int i = 0; i < 0x800; i += 2) {
-      uint8 temp = boot_rom[i];
-      boot_rom[i] = boot_rom[i+1];
-      boot_rom[i+1] = temp;
-    }
-  }
-
-  // Ensure config.rom exists
-  //json_t *config_rom = json_object_get(config_json, "rom");
-  //if (config_rom == NULL) return 0;
-
-  // Load rom and patch, show warning messages if any issues occur
-  /*
-  #ifdef ENABLE_DIALOGS
-    json_t *config_warn_patch_missing = json_object_get(config_rom, "warn_patch_missing");
-    if (
-      (diff_path == NULL) &&
-      (config_warn_patch_missing != NULL) &&
-      json_boolean_value(config_warn_patch_missing)
-    ) {
-      pfd::message(
-        "Patch Missing", 
-        "You are missing the IPS patch for this game. Things will likely not work correctly. Check your config.json if you're looking for where to put the patch file.",
-        pfd::choice::ok,
-        pfd::icon::warning
-      );
-    }
-  #endif
-  */
 
   if((rom_path == NULL) || !load_rom(rom_path, diff_path)) {
     char caption[256];
@@ -408,61 +316,10 @@ int main (int argc, char *argv[]) {
   audio_init(SOUND_FREQUENCY, framerate);
   system_init();
 
-  /* Mega CD specific */
-  if (system_hw == SYSTEM_MCD)
-  {
-    /* load internal backup RAM */
-    fp = fopen(PATH_SRAM_ROOT "scd.brm", "rb");
-    if (fp!=NULL)
-    {
-      fread(scd.bram, 0x2000, 1, fp);
-      fclose(fp);
-    }
-
-    /* check if internal backup RAM is formatted */
-    if (memcmp(scd.bram + 0x2000 - 0x20, brm_format + 0x20, 0x20))
-    {
-      /* clear internal backup RAM */
-      memset(scd.bram, 0x00, 0x200);
-
-      /* Internal Backup RAM size fields */
-      brm_format[0x10] = brm_format[0x12] = brm_format[0x14] = brm_format[0x16] = 0x00;
-      brm_format[0x11] = brm_format[0x13] = brm_format[0x15] = brm_format[0x17] = (sizeof(scd.bram) / 64) - 3;
-
-      /* format internal backup RAM */
-      memcpy(scd.bram + 0x2000 - 0x40, brm_format, 0x40);
-    }
-
-    /* load cartridge backup RAM */
-    if (scd.cartridge.id)
-    {
-      fp = fopen(PATH_SRAM_ROOT "cart.brm", "rb");
-      if (fp!=NULL)
-      {
-        fread(scd.cartridge.area, scd.cartridge.mask + 1, 1, fp);
-        fclose(fp);
-      }
-
-      /* check if cartridge backup RAM is formatted */
-      if (memcmp(scd.cartridge.area + scd.cartridge.mask + 1 - 0x20, brm_format + 0x20, 0x20))
-      {
-        /* clear cartridge backup RAM */
-        memset(scd.cartridge.area, 0x00, scd.cartridge.mask + 1);
-
-        /* Cartridge Backup RAM size fields */
-        brm_format[0x10] = brm_format[0x12] = brm_format[0x14] = brm_format[0x16] = (((scd.cartridge.mask + 1) / 64) - 3) >> 8;
-        brm_format[0x11] = brm_format[0x13] = brm_format[0x15] = brm_format[0x17] = (((scd.cartridge.mask + 1) / 64) - 3) & 0xff;
-
-        /* format cartridge backup RAM */
-        memcpy(scd.cartridge.area + scd.cartridge.mask + 1 - sizeof(brm_format), brm_format, sizeof(brm_format));
-      }
-    }
-  }
-
   if (sram.on)
   {
     /* load SRAM */
-    fp = fopen(PATH_SRAM_ROOT "savedata.srm", "rb");
+    FILE *fp = fopen(PATH_SRAM_ROOT "savedata.srm", "rb");
     if (fp!=NULL)
     {
       fread(sram.sram,0x10000,1, fp);
@@ -478,42 +335,48 @@ int main (int argc, char *argv[]) {
   long updatePeriod_nsec = (1000000000.0L / FRAMERATE_TARGET);
 
   /* emulation loop */
-  #ifdef __EMSCRIPTEN__
-   emscripten_set_main_loop(&mainloop, 60, 1);
-  #else
-    timespec timeAfter, timeBefore;
+#ifndef __EMSCRIPTEN__
+    const long frame_time_ns = (long)(1000000000.0 / FRAMERATE_TARGET);
+    timespec next_frame_time;
+    clock_gettime(CLOCK_MONOTONIC, &next_frame_time);
 
-    while(running) {
-      clock_gettime(CLOCK_MONOTONIC, &timeBefore);
-      mainloop();
-      clock_gettime(CLOCK_MONOTONIC, &timeAfter);
+    while (running) {
+        timespec now;
+        clock_gettime(CLOCK_MONOTONIC, &now);
 
-      timespec deltaSpec = {
-        .tv_sec = timeAfter.tv_sec - timeBefore.tv_sec,
-        .tv_nsec = timeAfter.tv_nsec - timeBefore.tv_nsec
-      };
+        long diff_ns = (now.tv_sec - next_frame_time.tv_sec) * 1000000000L +
+                       (now.tv_nsec - next_frame_time.tv_nsec);
 
-      if (deltaSpec.tv_nsec < 0) {
-          --deltaSpec.tv_sec;
-          deltaSpec.tv_nsec += 1000000000L;
-      }
 
-      Backend_Video_SetVsync(vsync_on && !turbo_mode);
+        if (diff_ns >= 0) {
+            mainloop();
 
-      if (!turbo_mode && !vsync_on && ((updatePeriod_nsec - deltaSpec.tv_nsec) > 0)) {
-        deltaSpec.tv_nsec = updatePeriod_nsec - deltaSpec.tv_nsec;
+            // schedule next frame
+            next_frame_time.tv_nsec += frame_time_ns;
+            while (next_frame_time.tv_nsec >= 1000000000L) {
+                next_frame_time.tv_sec++;
+                next_frame_time.tv_nsec -= 1000000000L;
+            }
 
-        while ( nanosleep(&deltaSpec, &deltaSpec) == EINTR ) {
-          /* Keep running "nanosleep" in case interrupt signal was received */;
+            // prevent runaway catch-up after long pauses
+            timespec check_now;
+            clock_gettime(CLOCK_MONOTONIC, &check_now);
+            long behind_ns = (check_now.tv_sec - next_frame_time.tv_sec) * 1000000000L +
+                             (check_now.tv_nsec - next_frame_time.tv_nsec);
+            if (behind_ns > frame_time_ns * 5) { // more than ~5 frames behind
+                next_frame_time = check_now;
+                next_frame_time.tv_nsec += frame_time_ns;
+                if (next_frame_time.tv_nsec >= 1000000000L) {
+                    next_frame_time.tv_sec++;
+                    next_frame_time.tv_nsec -= 1000000000L;
+                }
+            }
         }
       }
-    }
 
     sram_write();
-
     audio_shutdown();
     error_shutdown();
-
     Backend_Input_Close();
     Backend_Sound_Close();
     Backend_Video_Close();
@@ -521,7 +384,8 @@ int main (int argc, char *argv[]) {
     #ifdef ENABLE_NXLINK
     socketExit();
     #endif
-  #endif
+#endif
+
   
   return 0;
 }
