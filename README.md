@@ -10,6 +10,7 @@ Most of the heavy lifting was already done, but a few tweaks were still needed:
 Big fixes:
 - Fixed widescreen centering not working when S/H mode is enabled (I guess since Sonic 2 doesn't ever use these, it slipped through the cracks)
 - Changed sprite processing logic to still work during disabled display. This was required to make the cinematic black bars in ERaZor work flawlessly (since GPGX doesn't support the hardware mode)
+- Fixed Vsync logic so the emulator doesn't run into problems with non-60Hz monitors
 
 Streamlining:
 - ROM is bundled directly into the compiled EXE, rather than being required as a side file
